@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cut The Cake, Mr. Polarr! ⚔️🎂</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@400;600;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #090d0a;
+      background-image: radial-gradient(circle at 50% 30%, #112b18 0%, #090d0a 80%);
+      color: #e2f5e7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 25px 15px;
+      overflow: hidden;
+    }
+
+    .card {
+      max-width: 480px;
+      width: 100%;
+      background: #111813;
+      border: 3px solid #00ff66;
+      border-radius: 24px;
+      padding: 35px 25px;
+      text-align: center;
+      box-shadow: 0 0 35px rgba(0, 255, 102, 0.3);
+      position: relative;
+      z-index: 10;
+      overflow: hidden;
+    }
+
+    .tag {
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      letter-spacing: 3px;
+      color: #00ff66;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.1rem;
+      color: #ffffff;
+      text-shadow: 0 0 12px rgba(0, 255, 102, 0.6);
+      margin-bottom: 20px;
+    }
+
+    .cake-arena {
+      position: relative;
+      background: #090d0a;
+      border: 1px solid #1f3d28;
+      border-radius: 18px;
+      padding: 30px 15px;
+      margin-bottom: 20px;
+    }
+
+    .flame {
+      font-size: 2.2rem;
+      display: block;
+      margin-bottom: -14px;
+      animation: flicker 0.35s infinite alternate;
+      transition: opacity 0.3s;
+    }
+
+    .flame.out {
+      opacity: 0;
+      animation: none;
+    }
+
+    @keyframes flicker {
+      0% { transform: scale(1) rotate(-5deg); }
+      100% { transform: scale(1.18) rotate(5deg); }
+    }
+
+    .whole-cake {
+      font-size: 6rem;
+      cursor: pointer;
+      display: inline-block;
+      transition: transform 0.2s;
+      user-select: none;
+    }
+
+    .whole-cake:hover {
+      transform: scale(1.07);
+    }
+
+    .cut-slices {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      font-size: 4.8rem;
+      animation: splitApart 0.5s ease-out forwards;
+    }
+
+    @keyframes splitApart {
+      0% { gap: 0px; transform: scale(0.85); }
+      60% { gap: 45px; transform: scale(1.12); }
+      100% { gap: 30px; transform: scale(1); }
+    }
+
+    /* Zoro Green Sword Slash */
+    .sword-slash {
+      position: absolute;
+      top: 50%;
+      left: -120%;
+      width: 140%;
+      height: 6px;
+      background: linear-gradient(90deg, transparent, #00ff66, #ffffff, #00ff66, transparent);
+      box-shadow: 0 0 25px #00ff66, 0 0 40px #00ff66;
+      transform: rotate(-15deg);
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    .sword-slash.active {
+      animation: slashMove 0.45s ease-out forwards;
+    }
+
+    @keyframes slashMove {
+      0% { left: -120%; opacity: 1; }
+      50% { left: -10%; opacity: 1; }
+      100% { left: 120%; opacity: 0; }
+    }
+
+    .status-text {
+      font-size: 1rem;
+      color: #8ce9ad;
+      margin-bottom: 18px;
+      min-height: 24px;
+    }
+
+    .btn {
+      background: #00ff66;
+      color: #051409;
+      border: none;
+      padding: 14px 22px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      border-radius: 12px;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 15px rgba(0, 255, 102, 0.35);
+    }
+
+    .btn:hover {
+      background: #33ff85;
+      transform: translateY(-2px);
+    }
+
+    .btn-sword {
+      background: #ffffff;
+      color: #051409;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 18px;
+      color: #8ce9ad;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .back-link:hover {
+      color: #00ff66;
+      text-decoration: underline;
+    }
+
+    #confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 50;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="confetti"></canvas>
+
+  <div class="card">
+    <div class="tag">★ BIRTHDAY CEREMONY ★</div>
+    <h1>CUT THE CAKE, MR. POLARR</h1>
+
+    <div class="cake-arena">
+      <div class="sword-slash" id="slash"></div>
+
+      <div id="whole-stage" onclick="nextStep()">
+        <span class="flame" id="flame">🔥</span>
+        <div class="whole-cake">🎂</div>
+      </div>
+
+      <div class="cut-slices" id="sliced-stage">
+        <span>🍰</span>
+        <span>⚔️</span>
+        <span>🍰</span>
+      </div>
+    </div>
+
+    <p class="status-text" id="status">Make a wish & blow out the flame first!</p>
+    <button class="btn" id="action-btn" onclick="nextStep()">💨 Blow Out Candle</button>
+
+    <a href="index.html" class="back-link">← Back to Main Wanted Poster</a>
+  </div>
+
+  <script>
+    let step = 0;
+
+    function nextStep() {
+      const flame = document.getElementById('flame');
+      const status = document.getElementById('status');
+      const btn = document.getElementById('action-btn');
+      const slash = document.getElementById('slash');
+      const wholeStage = document.getElementById('whole-stage');
+      const slicedStage = document.getElementById('sliced-stage');
+
+      if (step === 0) {
+        flame.classList.add('out');
+        status.innerText = "✨ Wish locked in! Now draw your katana!";
+        btn.innerText = "⚔️ Three-Sword Style: Slice Cake!";
+        btn.classList.add('btn-sword');
+        step = 1;
+        launchConfetti();
+      } else if (step === 1) {
+        slash.classList.add('active');
+        setTimeout(() => {
+          wholeStage.style.display = 'none';
+          slicedStage.style.display = 'flex';
+          status.innerText = "🎉 Clean cut! Happy Birthday, Legend!";
+          btn.innerText = "🔥 Celebrate Again (More Confetti)";
+          step = 2;
+          launchConfetti();
+        }, 200);
+      } else {
+        launchConfetti();
+      }
+    }
+
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particles = [];
+    const colors = ['#00ff66', '#00cc52', '#ffffff', '#80ffb3'];
+
+    function launchConfetti() {
+      for (let i = 0; i < 100; i++) {
+        particles.push({
+          x: canvas.width / 2,
+          y: canvas.height / 2,
+          r: Math.random() * 6 + 4,
+          dx: (Math.random() - 0.5) * 18,
+          dy: (Math.random() - 0.5) * 18 - 4,
+          color: colors[Math.floor(Math.random() * colors.length)]
+        });
+      }
+    }
+
+    function updateConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p, index) => {
+        p.x += p.dx;
+        p.y += p.dy;
+        p.dy += 0.3;
+        ctx.fillStyle = p.color;
+        ctx.fillRect(p.x, p.y, p.r, p.r * 1.4);
+        if (p.y > canvas.height) particles.splice(index, 1);
+      });
+      requestAnimationFrame(updateConfetti);
+    }
+
+    window.onload = () => updateConfetti();
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
