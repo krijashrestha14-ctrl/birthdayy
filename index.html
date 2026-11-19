@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Mr. Polarr! 🏴‍☠️</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@400;600;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #090d0a;
+      background-image: radial-gradient(circle at 50% 20%, #112b18 0%, #090d0a 80%);
+      color: #e2f5e7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 15px;
+      overflow-x: hidden;
+    }
+
+    /* Floating One Piece / Pirate Vibes */
+    .floating-icon {
+      position: fixed;
+      bottom: -80px;
+      font-size: 2.2rem;
+      animation: floatUp 9s infinite linear;
+      z-index: 0;
+      opacity: 0.6;
+      user-select: none;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+      100% { transform: translateY(-115vh) rotate(25deg); opacity: 0; }
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 550px;
+      width: 100%;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    /* Wanted Poster / Hero Card */
+    .wanted-card {
+      background: #111813;
+      border: 3px solid #00ff66;
+      border-radius: 20px;
+      padding: 35px 25px;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(0, 255, 102, 0.25);
+      position: relative;
+    }
+
+    .wanted-tag {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      letter-spacing: 5px;
+      color: #00ff66;
+      font-weight: 900;
+      margin-bottom: 5px;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.5rem;
+      color: #ffffff;
+      text-shadow: 0 0 12px rgba(0, 255, 102, 0.6);
+      margin-bottom: 10px;
+    }
+
+    .bounty {
+      background: rgba(0, 255, 102, 0.1);
+      border: 1px dashed #00ff66;
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      color: #00ff66;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    /* Interactive Cake */
+    .cake-box {
+      cursor: pointer;
+      margin: 15px 0;
+      transition: transform 0.2s;
+    }
+
+    .cake-box:hover {
+      transform: scale(1.05);
+    }
+
+    .flame {
+      font-size: 1.8rem;
+      display: block;
+      margin-bottom: -12px;
+      animation: flicker 0.4s infinite alternate;
+    }
+
+    .flame.out {
+      opacity: 0;
+      animation: none;
+    }
+
+    @keyframes flicker {
+      0% { transform: scale(1) rotate(-4deg); }
+      100% { transform: scale(1.15) rotate(4deg); }
+    }
+
+    .cake {
+      font-size: 4.5rem;
+    }
+
+    .hint-text {
+      font-size: 0.85rem;
+      color: #8ce9ad;
+      margin-top: 5px;
+    }
+
+    /* Section Cards */
+    .section-card {
+      background: #111813;
+      border: 1px solid #1f3d28;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      color: #00ff66;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Buttons */
+    .btn {
+      background: #00ff66;
+      color: #051409;
+      border: none;
+      padding: 12px 22px;
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 12px;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 15px rgba(0, 255, 102, 0.3);
+    }
+
+    .btn:hover {
+      background: #33ff85;
+      transform: translateY(-2px);
+    }
+
+    /* Reasons Box */
+    .reason-display {
+      background: #090d0a;
+      border-left: 4px solid #00ff66;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      min-height: 65px;
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+      color: #fff;
+    }
+
+    /* Fake Quiz */
+    .quiz-option {
+      background: #18241c;
+      border: 1px solid #2a4d36;
+      color: #e2f5e7;
+      padding: 12px 15px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      text-align: left;
+      width: 100%;
+      font-size: 0.95rem;
+      transition: 0.2s;
+    }
+
+    .quiz-option:hover {
+      border-color: #00ff66;
+      background: #1f3326;
+    }
+
+    .quiz-result {
+      display: none;
+      margin-top: 15px;
+      padding: 15px;
+      background: rgba(0, 255, 102, 0.12);
+      border: 1px solid #00ff66;
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Homie Note */
+    .homie-note {
+      font-size: 0.98rem;
+      line-height: 1.6;
+      color: #cde8d5;
+    }
+
+    #confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 50;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="confetti"></canvas>
+
+  <!-- Floating Pirate / Zoro Icons -->
+  <div class="floating-icon" style="left: 10%; animation-delay: 0s;">🏴‍☠️</div>
+  <div class="floating-icon" style="left: 28%; animation-delay: 2.5s;">⚔️</div>
+  <div class="floating-icon" style="left: 65%; animation-delay: 1s;">💚</div>
+  <div class="floating-icon" style="left: 85%; animation-delay: 4s;">🍖</div>
+
+  <div class="container">
+
+    <!-- 1. HERO WANTED POSTER -->
+    <div class="wanted-card">
+      <div class="wanted-tag">★ WANTED: BIRTHDAY LEGEND ★</div>
+      <h1>MR. POLARR</h1>
+      <div class="bounty">BOUNTY: ฿ 3,000,000,000+ (Certified GOAT)</div>
+
+      <div class="cake-box" onclick="blowCandle()">
+        <span class="flame" id="flame">🔥</span>
+        <div class="cake">🎂</div>
+        <p class="hint-text" id="cake-hint">Tap the cake to use Conqueror's Haki & blow out the flame!</p>
+      </div>
+    </div>
+
+    <!-- 2. REASONS YOU'RE AWESOME GENERATOR -->
+    <div class="section-card">
+      <h2>⚔️ Why Mr. Polarr is Top Tier</h2>
+      <div class="reason-display" id="reason-box">
+        Click the button below to reveal the facts...
+      </div>
+      <button class="btn" onclick="nextReason()">Generate Reason ⚡</button>
+    </div>
+
+    <!-- 3. FAKE ONE PIECE QUIZ -->
+    <div class="section-card">
+      <h2>🏴‍☠️ Official Grand Line Vibe Check</h2>
+      <p style="margin-bottom: 15px; font-size: 0.95rem; color: #a3c9ae;">
+        Question: If Mr. Polarr joined the Straw Hat Pirates today, what would his role on the ship be?
+      </p>
+      
+      <button class="quiz-option" onclick="showQuizResult()">A) Vice-Captain & Right-Hand Man (Zoro energy)</button>
+      <button class="quiz-option" onclick="showQuizResult()">B) Master Strategist & Vibe Curator</button>
+      <button class="quiz-option" onclick="showQuizResult()">C) Getting lost on the way to the kitchen</button>
+      <button class="quiz-option" onclick="showQuizResult()">D) Eating all of Luffy's meat stash</button>
+
+      <div class="quiz-result" id="quiz-result">
+        <strong>🎉 CORRECT! (100% Match)</strong><br>
+        Trick question—it's ALL of the above. You're basically Zoro with better drip and main-character Haki. Happy Birthday bro!
+      </div>
+    </div>
+
+    <!-- 4. HOMIE MESSAGE -->
+    <div class="section-card">
+      <h2>💚 Real Talk For The Homie</h2>
+      <p class="homie-note">
+        Happy Birthday, Mr. Polarr! Appreciate you always being a real one. Hope this new year brings you massive W's, peak adventures, and zero bad days. Stay legendary, homie! 🏴‍☠️🔥
+      </p>
+    </div>
+
+  </div>
+
+  <script>
+    // Blow out candle
+    function blowCandle() {
+      const flame = document.getElementById('flame');
+      const hint = document.getElementById('cake-hint');
+      if (!flame.classList.contains('out')) {
+        flame.classList.add('out');
+        hint.innerText = "✨ Haki unleashed! Wish locked in! ✨";
+        launchConfetti();
+      }
+    }
+
+    // Reasons You're Awesome List
+    const reasons = [
+      "1. Elite taste in anime (One Piece supremacy is undefeated).",
+      "2. Black & green aesthetic hits harder than Three-Sword Style.",
+      "3. Always a loyal homie—never switches up.",
+      "4. Effortlessly carries the vibes wherever he goes.",
+      "5. Certified main character energy 24/7.",
+      "6. Too cool to ever get lost... unless he's pulling a Zoro."
+    ];
+    let reasonIndex = 0;
+
+    function nextReason() {
+      const box = document.getElementById('reason-box');
+      box.innerText = reasons[reasonIndex];
+      reasonIndex = (reasonIndex + 1) % reasons.length;
+      launchConfetti();
+    }
+
+    // Fake Quiz Reveal
+    function showQuizResult() {
+      const res = document.getElementById('quiz-result');
+      res.style.display = 'block';
+      launchConfetti();
+    }
+
+    // Green & White Confetti
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particles = [];
+    const colors = ['#00ff66', '#00cc52', '#ffffff', '#80ffb3', '#198754'];
+
+    function launchConfetti() {
+      for (let i = 0; i < 90; i++) {
+        particles.push({
+          x: canvas.width / 2,
+          y: canvas.height / 2,
+          r: Math.random() * 6 + 4,
+          dx: (Math.random() - 0.5) * 16,
+          dy: (Math.random() - 0.5) * 16 - 3,
+          color: colors[Math.floor(Math.random() * colors.length)]
+        });
+      }
+    }
+
+    function updateConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p, index) => {
+        p.x += p.dx;
+        p.y += p.dy;
+        p.dy += 0.3;
+        ctx.fillStyle = p.color;
+        ctx.fillRect(p.x, p.y, p.r, p.r * 1.4);
+        if (p.y > canvas.height) particles.splice(index, 1);
+      });
+      requestAnimationFrame(updateConfetti);
+    }
+
+    window.onload = () => {
+      launchConfetti();
+      updateConfetti();
+    };
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
